@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { getChains } from "./store/services/Tokens";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [isTestnet, setIsTestnet] = useState(false);
+
+  const { data, isLoading } = useSelector((state) => state.muwpay);
+  // console.log("🚀 ~ App ~ isLoading:", isLoading);
+  console.log("🚀 ~ user ~ user:", data);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getChains(isTestnet));
+  }, [isTestnet]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <div className="text-center">
+        <div className="h-16">
+          {isLoading && (
+            <div className="wrapper">
+              <div className="circle"></div>
+              <div className="circle"></div>
+              <div className="circle"></div>
+              <div className="shadow"></div>
+              <div className="shadow"></div>
+              <div className="shadow"></div>
+              <span>Loading</span>
+            </div>
+          )}
+        </div>
+
+        <button
+          className="bg-red-700 text-white px-4 py-2 w-52 rounded-lg"
+          onClick={() => setIsTestnet(!isTestnet)}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Currently on {isTestnet ? "Testnet" : "Mainnet"}
+        </button>
+      </div>
+    </>
   );
 }
 
