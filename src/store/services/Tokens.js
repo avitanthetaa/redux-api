@@ -19,10 +19,10 @@ export const getChains = createAsyncThunk(
 
 export const fromToken = createAsyncThunk(
   "/getFromTokens",
-  async (istestnet) => {
+  async ({ isTestnet, fromtokenId }) => {
     try {
       const { data } = await axios.get(
-        `${BaseURL}api/v1/lifi/tokens?isTestnet=${istestnet}&chainId=${1}`
+        `${BaseURL}api/v1/lifi/tokens?isTestnet=${isTestnet}&chainId=${fromtokenId}`
       );
       //   console.log("🚀 ~ data:", data);
       return data;

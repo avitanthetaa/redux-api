@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [isTestnet, setIsTestnet] = useState(false);
-  
+
+  const [fromtokenId, setFromtokenId] = useState(137);
 
   const { data, isLoading, fromTokenData } = useSelector(
     (state) => state.muwpay
@@ -16,8 +17,8 @@ function App() {
 
   useEffect(() => {
     dispatch(getChains(isTestnet));
-    dispatch(fromToken(isTestnet));
-  }, [isTestnet]);
+    dispatch(fromToken({ isTestnet, fromtokenId }));
+  }, [isTestnet, fromtokenId]);
 
   return (
     <>
