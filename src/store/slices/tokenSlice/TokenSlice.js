@@ -16,11 +16,13 @@ export const userChains = createSlice({
     [getChains.pending]: (state) => {
       state.isLoading = true;
     },
+
     [getChains.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.data = payload;
     },
+
     [getChains.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = false;
@@ -30,11 +32,13 @@ export const userChains = createSlice({
     [fromToken.pending]: (state) => {
       state.isLoading = true;
     },
+
     [fromToken.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.fromTokenData = payload;
     },
+
     [fromToken.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = false;

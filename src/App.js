@@ -5,13 +5,11 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [isTestnet, setIsTestnet] = useState(false);
+  
 
   const { data, isLoading, fromTokenData } = useSelector(
     (state) => state.muwpay
   );
-  // console.log("🚀 ~ App ~ data:", data);
-
-  // const fromTokenData = useSelector((state) => state);
   console.log("🚀 ~ App ~ fromTokenData:", fromTokenData);
 
   const dispatch = useDispatch();
