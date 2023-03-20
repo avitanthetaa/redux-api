@@ -1,19 +1,24 @@
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getChains } from "./store/services/Tokens";
+import { fromToken, getChains } from "./store/services/Tokens";
 import { useEffect, useState } from "react";
 
 function App() {
   const [isTestnet, setIsTestnet] = useState(false);
 
-  const { data, isLoading } = useSelector((state) => state.muwpay);
-  // console.log("🚀 ~ App ~ isLoading:", isLoading);
-  console.log("🚀 ~ user ~ user:", data);
+  const { data, isLoading, fromTokenData } = useSelector(
+    (state) => state.muwpay
+  );
+  // console.log("🚀 ~ App ~ data:", data);
+
+  // const fromTokenData = useSelector((state) => state);
+  console.log("🚀 ~ App ~ fromTokenData:", fromTokenData);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getChains(isTestnet));
+    dispatch(fromToken(isTestnet));
   }, [isTestnet]);
 
   return (

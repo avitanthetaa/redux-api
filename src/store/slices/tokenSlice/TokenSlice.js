@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getChains } from "../../services/Tokens";
+import { getChains, fromToken } from "../../services/Tokens";
 
 const initialState = {
   data: [],
+  fromTokenData: [],
   isLoading: false,
   isSuccess: false,
   errorMessage: "",
@@ -21,6 +22,20 @@ export const userChains = createSlice({
       state.data = payload;
     },
     [getChains.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.errorMessage = payload;
+    },
+
+    [fromToken.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fromToken.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.fromTokenData = payload;
+    },
+    [fromToken.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = false;
       state.errorMessage = payload;
