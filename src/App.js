@@ -8,9 +8,10 @@ function App() {
 
   const [fromtokenId, setFromtokenId] = useState(137);
 
-  const { data, isLoading, fromTokenData } = useSelector(
+  const { chainData, isLoading, fromTokenData } = useSelector(
     (state) => state.muwpay
   );
+  console.log("🚀 ~ App ~ chainData:", chainData);
   console.log("🚀 ~ App ~ fromTokenData:", fromTokenData);
 
   const dispatch = useDispatch();
